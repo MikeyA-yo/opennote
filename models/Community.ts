@@ -7,6 +7,7 @@ export interface ICommunity {
     imageUrl: string;
     type: "Family" | "Organization" | "Cause" | "Other";
     createdAt: Date;
+    members: number;
 }
 
 const CommunitySchema = new Schema<ICommunity>(
@@ -29,6 +30,10 @@ const CommunitySchema = new Schema<ICommunity>(
             type: String,
             enum: ["Family", "Organization", "Cause", "Other"],
             default: "Other",
+        },
+        members: {
+            type: Number,
+            default: 0,
         },
     },
     {
