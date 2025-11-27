@@ -3,8 +3,7 @@ import connectToDatabase from "@/lib/db";
 import Community from "@/models/Community";
 import { notFound } from "next/navigation";
 import JoinButton from "./JoinButton";
-
-
+import CommunityNotes from "./CommunityNotes";
 async function getCommunity(id: string) {
     try {
         await connectToDatabase();
@@ -74,29 +73,20 @@ export default async function CommunityPage({
                     <div className="flex flex-col md:flex-row gap-12">
                         <div className="flex-grow">
                             <h2 className="text-2xl font-serif mb-6 text-stone-900">Community Notes</h2>
-                            <div className="bg-stone-50 rounded-xl p-12 text-center border border-stone-100">
-                                <p className="text-stone-500 mb-4">No notes have been written for this community yet.</p>
-                                <button className="px-6 py-2 bg-white border border-stone-200 rounded-full text-stone-900 hover:bg-stone-50 transition-colors">
-                                    Be the first to write
-                                </button>
-                            </div>
+                            <CommunityNotes communityId={community._id} />
                         </div>
 
                         <div className="w-full md:w-80 flex-shrink-0">
                             <div className="bg-stone-50 p-6 rounded-xl border border-stone-100 sticky top-6">
                                 <h3 className="font-serif text-lg mb-4">About</h3>
                                 <p className="text-sm text-stone-600 mb-6">
-                                    This community is a space for tributes, memories, and open notes dedicated to {community.name}.
+                                    This community is a space for memories, messages, and open notes dedicated to {community.name}.
                                 </p>
                                 <div className="border-t border-stone-200 pt-4">
                                     <div className="text-xs text-stone-400 uppercase tracking-wider mb-2">Stats</div>
                                     <div className="flex justify-between items-center mb-2">
                                         <span className="text-sm text-stone-600">Members</span>
                                         <span className="font-medium">{community.members || 0}</span>
-                                    </div>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-sm text-stone-600">Notes</span>
-                                        <span className="font-medium">0</span>
                                     </div>
                                 </div>
                             </div>

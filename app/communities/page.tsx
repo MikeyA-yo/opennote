@@ -34,7 +34,7 @@ export default async function CommunitiesPage() {
                 <div className="flex justify-between items-end mb-12">
                     <div>
                         <h1 className="text-4xl font-serif font-medium mb-4 text-stone-900">Explore Communities</h1>
-                        <p className="text-stone-600">Find a space to share your tribute.</p>
+                        <p className="text-stone-600">Find a space to share your memories.</p>
                     </div>
                 </div>
 

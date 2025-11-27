@@ -24,7 +24,7 @@ export default function Home() {
             Words that last <TypewriterTitle phrases={["forever", "for good times", "for history"]} />
           </h1>
           <p className="text-lg md:text-xl text-stone-600 mb-10 max-w-2xl mx-auto leading-relaxed">
-            A sanctuary for open notes, tributes, and dedications.
+            A sanctuary for open notes, memories, and dedications.
             Share your gratitude, honor a memory, or stand for a cause.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -32,7 +32,7 @@ export default function Home() {
               Start Writing
             </button>
             <button className="px-8 py-3 bg-white text-stone-900 border border-stone-200 rounded-full text-lg hover:bg-stone-50 transition-all">
-              Explore Tributes
+              Explore Notes
             </button>
           </div>
         </section>
@@ -43,7 +43,7 @@ export default function Home() {
             <div className="space-y-6">
               <h2 className="text-3xl md:text-4xl font-serif">Why OpenNote?</h2>
               <p className="text-stone-600 text-lg leading-relaxed">
-                In a fleeting digital world, some words deserve to stay. OpenNote is a public archive of appreciation and remembrance. Whether it's a letter to a mentor, a tribute to a lost loved one, or a pledge to a movement, your words find a permanent home here.
+                In a fleeting digital world, some words deserve to stay. OpenNote is a public archive of appreciation and remembrance. Whether it's a letter to a mentor, a memory of a lost loved one, or a pledge to a movement, your words find a permanent home here.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -74,7 +74,7 @@ export default function Home() {
         {/* Featured Tributes Preview */}
         <section className="py-20 px-6 max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif mb-4">Recent Tributes</h2>
+            <h2 className="text-3xl md:text-4xl font-serif mb-4">Recent Notes</h2>
             <p className="text-stone-500">Read what others are sharing with the world.</p>
           </div>
 
@@ -108,7 +108,7 @@ export default function Home() {
               <div key={i} className="group cursor-pointer">
                 <div className="bg-white border border-stone-100 p-8 rounded-2xl shadow-sm group-hover:shadow-md transition-all h-full flex flex-col">
                   <div className="mb-6 flex justify-between items-start">
-                    <span className="text-xs font-medium uppercase tracking-wider text-stone-400">Tribute</span>
+                    <span className="text-xs font-medium uppercase tracking-wider text-stone-400">Memory</span>
                     <span className="inline-flex items-center rounded-full bg-stone-100 px-2.5 py-0.5 text-xs font-medium text-stone-800">
                       {tribute.community}
                     </span>

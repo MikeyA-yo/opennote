@@ -25,7 +25,7 @@ export default function About() {
                     </p>
                     <p>
                         In an era of fleeting digital interactions, we wanted to create a sanctuary for the words that matter most.
-                        Whether it's a tribute to a loved one who has passed, a note of gratitude to a mentor, or a public pledge to a cause you believe in,
+                        Whether it's a memory of a loved one who has passed, a note of gratitude to a mentor, or a public pledge to a cause you believe in,
                         OpenNote is the place where these sentiments can stand still.
                     </p>
                     <p>

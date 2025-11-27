@@ -14,7 +14,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "OpenNote | Words that last forever",
-  description: "A space for open notes, tributes, and dedications.",
+  description: "A space for open notes, memories, and dedications.",
 };
 
 export default function RootLayout({
