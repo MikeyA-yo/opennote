@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   description: "A space for open notes, memories, and dedications.",
 };
 
+import Navbar from "./components/Navbar";
+import { ToastProvider } from "./components/Toast";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,7 +30,10 @@ export default function RootLayout({
       <body
         className={`${playfair.variable} ${inter.variable} antialiased font-sans bg-stone-50 text-stone-900`}
       >
-        {children}
+        <ToastProvider>
+          <Navbar />
+          {children}
+        </ToastProvider>
       </body>
     </html>
   );

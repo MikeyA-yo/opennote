@@ -10,6 +10,10 @@ interface Track {
     uri: string;
 }
 
+import { useToast } from "@/app/components/Toast";
+
+// ... (keep Track interface)
+
 export default function PlaylistManager({
     communityId,
     playlistId,
@@ -17,11 +21,13 @@ export default function PlaylistManager({
     communityId: string;
     playlistId: string;
 }) {
+    const { success, error } = useToast();
     const [isSearching, setIsSearching] = useState(false);
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<Track[]>([]);
     const [loading, setLoading] = useState(false);
     const [adding, setAdding] = useState<string | null>(null);
+    const [recentlyAdded, setRecentlyAdded] = useState<Track[]>([]);
 
     const [refreshKey, setRefreshKey] = useState(0);
 
@@ -34,33 +40,36 @@ export default function PlaylistManager({
             const res = await fetch(`/api/spotify/search?q=${encodeURIComponent(query)}`);
             const data = await res.json();
             setResults(data || []);
-        } catch (error) {
-            console.error("Search failed", error);
+        } catch (err) {
+            console.error("Search failed", err);
+            error("Failed to search tracks");
         } finally {
             setLoading(false);
         }
     };
 
-    const handleAddTrack = async (trackUri: string, trackId: string) => {
-        setAdding(trackId);
+    const handleAddTrack = async (track: Track) => {
+        setAdding(track.id);
         try {
             const res = await fetch(`/api/communities/${communityId}/playlist/add`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ trackUri }),
+                body: JSON.stringify({ trackUri: track.uri }),
             });
 
             if (res.ok) {
-                alert("Track added!");
+                success(`Added "${track.name}" to playlist!`);
+                setRecentlyAdded((prev) => [track, ...prev]);
                 setIsSearching(false);
                 setQuery("");
                 setResults([]);
                 setRefreshKey((prev) => prev + 1); // Force refresh of iframe
             } else {
-                alert("Failed to add track.");
+                error("Failed to add track.");
             }
-        } catch (error) {
-            console.error("Add failed", error);
+        } catch (err) {
+            console.error("Add failed", err);
+            error("Something went wrong");
         } finally {
             setAdding(null);
         }
@@ -68,9 +77,9 @@ export default function PlaylistManager({
 
     return (
         <div className="mt-4">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0 mb-6">
                 <h2 className="text-2xl font-serif text-stone-900">Community Playlist</h2>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     <a
                         href={`https://open.spotify.com/playlist/${playlistId}`}
                         target="_blank"
@@ -96,6 +105,25 @@ export default function PlaylistManager({
                     </button>
                 </div>
             </div>
+
+            {recentlyAdded.length > 0 && (
+                <div className="mb-6 p-4 bg-green-50 border border-green-100 rounded-xl">
+                    <h4 className="text-sm font-medium text-green-900 mb-3 flex items-center gap-2">
+                        <span>✨</span> Recently Added
+                    </h4>
+                    <div className="space-y-2">
+                        {recentlyAdded.map((track, i) => (
+                            <div key={`${track.id}-${i}`} className="flex items-center gap-3 bg-white/50 p-2 rounded-lg">
+                                <img src={track.album.images[2]?.url} alt={track.name} className="w-8 h-8 rounded shadow-sm" />
+                                <div className="text-sm min-w-0">
+                                    <div className="font-medium text-green-900 truncate">{track.name}</div>
+                                    <div className="text-green-700 text-xs truncate">{track.artists[0].name}</div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
 
             {isSearching && (
                 <div className="mb-8 p-6 bg-white border border-stone-200 rounded-xl shadow-sm">
@@ -135,7 +163,7 @@ export default function PlaylistManager({
                                     </div>
                                 </div>
                                 <button
-                                    onClick={() => handleAddTrack(track.uri, track.id)}
+                                    onClick={() => handleAddTrack(track)}
                                     disabled={adding === track.id}
                                     className="px-4 py-2 text-sm bg-stone-900 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all disabled:opacity-50"
                                 >
@@ -149,7 +177,7 @@ export default function PlaylistManager({
             <iframe
                 key={refreshKey}
                 style={{ borderRadius: "12px" }}
-                src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&v=${refreshKey}`}
+                src={`https://open.spotify.com/embed/playlist/${playlistId}?v=${refreshKey}`}
                 width="100%"
                 height="600"
                 frameBorder="0"

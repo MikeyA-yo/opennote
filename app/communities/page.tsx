@@ -18,18 +18,6 @@ export default async function CommunitiesPage() {
 
     return (
         <div className="min-h-screen flex flex-col">
-            <nav className="w-full py-6 px-6 md:px-12 flex justify-between items-center max-w-7xl mx-auto">
-                <Link href="/" className="text-2xl font-serif font-bold tracking-tight">OpenNote.</Link>
-                <div className="space-x-6 text-sm font-medium text-stone-600">
-                    <Link href="#" className="hover:text-stone-900 transition-colors">Read</Link>
-                    <Link href="/communities" className="text-stone-900 transition-colors">Communities</Link>
-                    <Link href="/about" className="hover:text-stone-900 transition-colors">About</Link>
-                    <Link href="/communities/create" className="px-4 py-2 bg-stone-900 text-stone-50 rounded-full hover:bg-stone-800 transition-colors">
-                        Create Community
-                    </Link>
-                </div>
-            </nav>
-
             <main className="flex-grow py-12 px-6 max-w-7xl mx-auto w-full">
                 <div className="flex justify-between items-end mb-12">
                     <div>
