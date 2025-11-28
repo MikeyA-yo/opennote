@@ -80,11 +80,11 @@ export default function JoinButton({
             onClick={handleJoinClick}
             disabled={joined || loading}
             className={`px-6 py-3 rounded-full font-medium transition-all ${joined
-                    ? "bg-stone-800 text-stone-400 cursor-default"
-                    : "bg-white text-stone-900 hover:bg-stone-100"
+                ? "bg-stone-800 text-stone-400 cursor-default"
+                : "bg-white text-stone-900 hover:bg-stone-100"
                 }`}
         >
-            {loading ? "Joining..." : joined ? "Joined" : `Join Community (${members})`}
+            {loading ? "Joining..." : joined ? `Joined (${members})` : `Join Community (${members})`}
         </button>
     );
 }

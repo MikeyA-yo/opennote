@@ -1,6 +1,7 @@
 import Link from "next/link";
 import connectToDatabase from "@/lib/db";
 import Community from "@/models/Community";
+import Member from "@/models/Member";
 import { notFound } from "next/navigation";
 import JoinButton from "./JoinButton";
 import CommunityNotes from "./CommunityNotes";
@@ -13,6 +14,11 @@ async function getCommunity(id: string) {
         await connectToDatabase();
         const community = await Community.findById(id).lean();
         if (!community) return null;
+
+        // Get real member count
+        const memberCount = await Member.countDocuments({ communityId: id });
+        community.members = memberCount;
+
         return JSON.parse(JSON.stringify(community));
     } catch (error) {
         return null;
