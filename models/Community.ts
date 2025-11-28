@@ -8,6 +8,8 @@ export interface ICommunity {
     type: "Family" | "Organization" | "Cause" | "Other";
     createdAt: Date;
     members: number;
+    spotifyPlaylistId?: string;
+    spotifyRefreshToken?: string;
 }
 
 const CommunitySchema = new Schema<ICommunity>(
@@ -34,6 +36,13 @@ const CommunitySchema = new Schema<ICommunity>(
         members: {
             type: Number,
             default: 0,
+        },
+        spotifyPlaylistId: {
+            type: String,
+        },
+        spotifyRefreshToken: {
+            type: String,
+            select: false,
         },
     },
     {

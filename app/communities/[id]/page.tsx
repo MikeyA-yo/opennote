@@ -4,6 +4,10 @@ import Community from "@/models/Community";
 import { notFound } from "next/navigation";
 import JoinButton from "./JoinButton";
 import CommunityNotes from "./CommunityNotes";
+import PlaylistManager from "./PlaylistManager";
+
+export const dynamic = "force-dynamic";
+
 async function getCommunity(id: string) {
     try {
         await connectToDatabase();
@@ -17,10 +21,13 @@ async function getCommunity(id: string) {
 
 export default async function CommunityPage({
     params,
+    searchParams,
 }: {
     params: Promise<{ id: string }>;
+    searchParams: Promise<{ view?: string }>;
 }) {
     const { id } = await params;
+    const { view } = await searchParams;
     const community = await getCommunity(id);
 
     if (!community) {
@@ -72,8 +79,60 @@ export default async function CommunityPage({
                 <div className="max-w-7xl mx-auto py-12 px-6">
                     <div className="flex flex-col md:flex-row gap-12">
                         <div className="flex-grow">
-                            <h2 className="text-2xl font-serif mb-6 text-stone-900">Community Notes</h2>
-                            <CommunityNotes communityId={community._id} />
+                            {/* Tabs */}
+                            <div className="flex gap-8 border-b border-stone-200 mb-8">
+                                <Link
+                                    href={`/communities/${id}`}
+                                    className={`pb-4 text-sm font-medium transition-colors relative ${!view || view === "notes"
+                                        ? "text-stone-900"
+                                        : "text-stone-500 hover:text-stone-700"
+                                        }`}
+                                >
+                                    Notes
+                                    {(!view || view === "notes") && (
+                                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-stone-900" />
+                                    )}
+                                </Link>
+                                <Link
+                                    href={`/communities/${id}?view=playlist`}
+                                    className={`pb-4 text-sm font-medium transition-colors relative ${view === "playlist"
+                                        ? "text-stone-900"
+                                        : "text-stone-500 hover:text-stone-700"
+                                        }`}
+                                >
+                                    Playlist
+                                    {view === "playlist" && (
+                                        <span className="absolute bottom-0 left-0 w-full h-0.5 bg-stone-900" />
+                                    )}
+                                </Link>
+                            </div>
+
+                            {view === "playlist" ? (
+                                community.spotifyPlaylistId ? (
+                                    <PlaylistManager
+                                        communityId={community._id}
+                                        playlistId={community.spotifyPlaylistId}
+                                    />
+                                ) : (
+                                    <div className="bg-stone-50 rounded-xl p-12 text-center border border-stone-100">
+                                        <h3 className="font-serif text-xl mb-4">Community Playlist</h3>
+                                        <p className="text-stone-600 mb-6 max-w-md mx-auto">
+                                            Create a collaborative playlist for this community on Spotify.
+                                        </p>
+                                        <a
+                                            href={`/api/spotify/login?communityId=${community._id}`}
+                                            className="inline-block px-6 py-3 bg-[#1DB954] text-white font-medium rounded-full hover:bg-[#1ed760] transition-colors"
+                                        >
+                                            Connect Spotify
+                                        </a>
+                                    </div>
+                                )
+                            ) : (
+                                <>
+                                    <h2 className="text-2xl font-serif mb-6 text-stone-900">Community Notes</h2>
+                                    <CommunityNotes communityId={community._id} />
+                                </>
+                            )}
                         </div>
 
                         <div className="w-full md:w-80 flex-shrink-0">
