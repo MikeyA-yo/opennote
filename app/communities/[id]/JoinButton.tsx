@@ -55,19 +55,19 @@ export default function JoinButton({
 
     if (showInput && !joined) {
         return (
-            <form onSubmit={handleConfirmJoin} className="flex items-center gap-2">
+            <form onSubmit={handleConfirmJoin} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                 <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email..."
-                    className="px-4 py-3 rounded-full bg-stone-800 text-white border border-stone-700 focus:outline-none focus:border-stone-500"
+                    className="px-4 py-3 rounded-full bg-stone-800 text-white border border-stone-700 focus:outline-none focus:border-stone-500 w-full sm:w-auto"
                     autoFocus
                 />
                 <button
                     type="submit"
                     disabled={loading}
-                    className="px-6 py-3 rounded-full bg-white text-stone-900 font-medium hover:bg-stone-100 disabled:opacity-50"
+                    className="px-6 py-3 rounded-full bg-white text-stone-900 font-medium hover:bg-stone-100 disabled:opacity-50 w-full sm:w-auto"
                 >
                     {loading ? "..." : "Join"}
                 </button>

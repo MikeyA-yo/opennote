@@ -59,7 +59,7 @@ export default async function CommunityPage({
                             <h1 className="text-4xl md:text-6xl font-serif text-white mb-4">{community.name}</h1>
                             <p className="text-lg text-stone-200 max-w-2xl mb-8">{community.description}</p>
 
-                            <div className="flex items-center gap-6">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                                 <JoinButton communityId={community._id} initialMembers={community.members || 0} />
                                 <div className="text-stone-300 text-sm">
                                     Created {new Date(community.createdAt).toLocaleDateString()}
