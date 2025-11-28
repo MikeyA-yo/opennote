@@ -149,7 +149,7 @@ export default function PlaylistManager({
             <iframe
                 key={refreshKey}
                 style={{ borderRadius: "12px" }}
-                src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&t=${refreshKey}`}
+                src={`https://open.spotify.com/embed/playlist/${playlistId}?utm_source=generator&v=${refreshKey}`}
                 width="100%"
                 height="600"
                 frameBorder="0"
