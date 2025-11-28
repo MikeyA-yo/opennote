@@ -77,8 +77,20 @@ export default function WriteNoteForm({ communityId, onNoteCreated }: { communit
 
     if (!isMember) {
         return (
-            <div className="bg-stone-50 rounded-xl p-8 text-center border border-stone-100">
-                <p className="text-stone-500 mb-4">Join this community to leave a note.</p>
+            <div className="bg-stone-50 rounded-xl p-12 text-center border border-stone-100 flex flex-col items-center justify-center">
+                <div className="w-12 h-12 bg-stone-200 rounded-full flex items-center justify-center mb-4 text-2xl">
+                    🔒
+                </div>
+                <h3 className="text-lg font-serif font-medium text-stone-900 mb-2">Members Only</h3>
+                <p className="text-stone-500 mb-6 max-w-sm">
+                    You must be a member of this community to share your notes and memories.
+                </p>
+                <button
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="px-6 py-2 bg-stone-900 text-white rounded-full text-sm font-medium hover:bg-stone-800 transition-colors"
+                >
+                    Join Community
+                </button>
             </div>
         );
     }
