@@ -6,6 +6,8 @@ export interface INote {
     authorEmail: string;
     content: string;
     imageUrl?: string;
+    likes: string[];
+    commentsCount: number;
     createdAt: Date;
 }
 
@@ -27,6 +29,14 @@ const NoteSchema = new Schema<INote>(
         },
         imageUrl: {
             type: String,
+        },
+        likes: {
+            type: [String],
+            default: [],
+        },
+        commentsCount: {
+            type: Number,
+            default: 0,
         },
     },
     {
