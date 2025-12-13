@@ -25,7 +25,7 @@ const NoteSchema = new Schema<INote>(
         content: {
             type: String,
             required: [true, "Please provide content for the note."],
-            maxlength: [1000, "Note cannot be more than 1000 characters"],
+            maxlength: [20000, "Note cannot be more than 20000 characters"],
         },
         imageUrl: {
             type: String,
