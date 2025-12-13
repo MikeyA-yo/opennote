@@ -127,7 +127,7 @@ export default function PlaylistManager({
 
             {isSearching && (
                 <div className="mb-8 p-6 bg-white border border-stone-200 rounded-xl shadow-sm">
-                    <form onSubmit={handleSearch} className="flex gap-4 mb-6">
+                    <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-4 mb-6">
                         <input
                             type="text"
                             value={query}
@@ -139,7 +139,7 @@ export default function PlaylistManager({
                         <button
                             type="submit"
                             disabled={loading}
-                            className="px-6 py-3 bg-stone-900 text-white font-medium rounded-xl hover:bg-stone-800 disabled:opacity-50"
+                            className="w-full sm:w-auto px-6 py-3 bg-stone-900 text-white font-medium rounded-xl hover:bg-stone-800 disabled:opacity-50"
                         >
                             {loading ? "..." : "Search"}
                         </button>
@@ -165,7 +165,7 @@ export default function PlaylistManager({
                                 <button
                                     onClick={() => handleAddTrack(track)}
                                     disabled={adding === track.id}
-                                    className="px-4 py-2 text-sm bg-stone-900 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all disabled:opacity-50"
+                                    className="px-4 py-2 text-sm bg-stone-900 text-white rounded-full transition-all disabled:opacity-50"
                                 >
                                     {adding === track.id ? "Adding..." : "Add"}
                                 </button>
