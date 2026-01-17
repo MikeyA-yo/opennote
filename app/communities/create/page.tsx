@@ -25,6 +25,17 @@ export default function CreateCommunity() {
         e.preventDefault();
         setLoading(true);
 
+        // Get creator email from localStorage
+        let creatorEmail = localStorage.getItem("user_email");
+        if (!creatorEmail) {
+            creatorEmail = prompt("Please enter your email to create this community:");
+            if (!creatorEmail) {
+                setLoading(false);
+                return;
+            }
+            localStorage.setItem("user_email", creatorEmail);
+        }
+
         try {
             let imageUrl = formData.imageUrl;
 
@@ -51,7 +62,7 @@ export default function CreateCommunity() {
             const res = await fetch("/api/communities", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ...formData, imageUrl }),
+                body: JSON.stringify({ ...formData, imageUrl, creatorEmail }),
             });
 
             if (res.ok) {

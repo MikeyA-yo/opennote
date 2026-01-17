@@ -10,6 +10,8 @@ export interface ICommunity {
     members: number;
     spotifyPlaylistId?: string;
     spotifyRefreshToken?: string;
+    isPrivate: boolean;
+    creatorEmail: string;
 }
 
 const CommunitySchema = new Schema<ICommunity>(
@@ -43,6 +45,14 @@ const CommunitySchema = new Schema<ICommunity>(
         spotifyRefreshToken: {
             type: String,
             select: false,
+        },
+        isPrivate: {
+            type: Boolean,
+            default: false,
+        },
+        creatorEmail: {
+            type: String,
+            required: [true, "Creator email is required"],
         },
     },
     {

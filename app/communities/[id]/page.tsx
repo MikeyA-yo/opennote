@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import JoinButton from "./JoinButton";
 import CommunityNotes from "./CommunityNotes";
 import PlaylistManager from "./PlaylistManager";
+import CommunitySettings from "./CommunitySettings";
 
 export const dynamic = "force-dynamic";
 
@@ -142,6 +143,11 @@ export default async function CommunityPage({
                                         <span className="font-medium">{community.members || 0}</span>
                                     </div>
                                 </div>
+                                <CommunitySettings
+                                    communityId={community._id}
+                                    creatorEmail={community.creatorEmail}
+                                    initialIsPrivate={community.isPrivate}
+                                />
                             </div>
                         </div>
                     </div>

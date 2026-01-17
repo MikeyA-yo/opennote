@@ -2,28 +2,44 @@ import Link from "next/link";
 import connectToDatabase from "@/lib/db";
 import Community from "@/models/Community";
 
-async function getCommunities() {
+async function getCommunities(search?: string) {
     try {
         await connectToDatabase();
+
+        let query: any = {};
+        if (search) {
+            query.name = { $regex: search, $options: "i" };
+        } else {
+            query.isPrivate = { $ne: true };
+        }
+
         // Plain object serialization for Next.js
-        const communities = await Community.find({}).sort({ createdAt: -1 }).lean();
+        const communities = await Community.find(query).sort({ createdAt: -1 }).lean();
         return JSON.parse(JSON.stringify(communities));
     } catch (error) {
         return [];
     }
 }
 
-export default async function CommunitiesPage() {
-    const communities = await getCommunities();
+import CommunitySearch from "./CommunitySearch";
+
+export default async function CommunitiesPage({
+    searchParams,
+}: {
+    searchParams: Promise<{ search?: string }>;
+}) {
+    const { search } = await searchParams;
+    const communities = await getCommunities(search);
 
     return (
         <div className="min-h-screen flex flex-col">
             <main className="flex-grow py-12 px-6 max-w-7xl mx-auto w-full">
-                <div className="flex justify-between items-end mb-12">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                     <div>
                         <h1 className="text-4xl font-serif font-medium mb-4 text-stone-900">Explore Communities</h1>
                         <p className="text-stone-600">Find a space to share your memories.</p>
                     </div>
+                    <CommunitySearch />
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8">
