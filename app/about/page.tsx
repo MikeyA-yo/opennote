@@ -3,18 +3,6 @@ import Link from "next/link";
 export default function About() {
     return (
         <div className="min-h-screen flex flex-col">
-            {/* Navigation */}
-            <nav className="w-full py-6 px-6 md:px-12 flex justify-between items-center max-w-7xl mx-auto">
-                <Link href="/" className="text-2xl font-serif font-bold tracking-tight">OpenNote.</Link>
-                <div className="space-x-6 text-sm font-medium text-stone-600">
-                    <Link href="#" className="hover:text-stone-900 transition-colors">Read</Link>
-                    <Link href="/communities" className="hover:text-stone-900 transition-colors">Communities</Link>
-                    <Link href="/about" className="text-stone-900 transition-colors">About</Link>
-                    <Link href="/communities/create" className="px-4 py-2 bg-stone-900 text-stone-50 rounded-full hover:bg-stone-800 transition-colors">
-                        Write a Note
-                    </Link>
-                </div>
-            </nav>
 
             <main className="flex-grow py-20 px-6 max-w-3xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-serif font-medium mb-12 text-stone-900">About OpenNote.</h1>
