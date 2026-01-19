@@ -119,7 +119,7 @@ export default function Home() {
           </div>
 
           <div className="text-center mt-12">
-            <Link href="#" className="text-stone-900 font-medium border-b border-stone-900 pb-0.5 hover:text-stone-600 hover:border-stone-600 transition-colors">
+            <Link href="/communities" className="text-stone-900 font-medium border-b border-stone-900 pb-0.5 hover:text-stone-600 hover:border-stone-600 transition-colors">
               Read all notes &rarr;
             </Link>
           </div>
@@ -130,9 +130,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-2xl font-serif text-stone-50">OpenNote.</div>
           <div className="flex gap-8 text-sm">
-            <Link href="#" className="hover:text-stone-200 transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-stone-200 transition-colors">Terms</Link>
-            <Link href="#" className="hover:text-stone-200 transition-colors">Contact</Link>
+            <Link target="_blank" href="https://github.com/MikeyA-yo/opennote" className="hover:text-stone-200 transition-colors">Privacy</Link>
+            <Link target="_blank" href="https://x.com/OluwatolaAyomi4" className="hover:text-stone-200 transition-colors">Terms</Link>
+            <Link target="_blank" href="https://ay10xdev.vercel.app/" className="hover:text-stone-200 transition-colors">Contact</Link>
           </div>
           <div className="text-xs text-stone-600">
             &copy; {new Date().getFullYear()} OpenNote. All rights reserved.

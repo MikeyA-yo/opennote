@@ -15,7 +15,6 @@ export default function Navbar() {
 
                 {/* Desktop Menu */}
                 <div className="hidden md:flex items-center space-x-8 text-sm font-medium text-stone-600">
-                    <Link href="#" className="hover:text-stone-900 transition-colors">Read</Link>
                     <Link href="/communities" className="text-stone-900 transition-colors">Communities</Link>
                     <Link href="/about" className="hover:text-stone-900 transition-colors">About</Link>
                     <Link href="/communities/create" className="px-5 py-2.5 bg-stone-900 text-stone-50 rounded-full hover:bg-stone-800 transition-colors">
