@@ -39,7 +39,12 @@ export default async function CommunitiesPage({
                         <h1 className="text-4xl font-serif font-medium mb-4 text-stone-900">Explore Communities</h1>
                         <p className="text-stone-600">Find a space to share your memories.</p>
                     </div>
-                    <CommunitySearch />
+                    <div className="flex items-center gap-2">
+                        <Link href="/communities/create" className="px-5 py-2.5 text-center bg-stone-900 text-white rounded-full hover:bg-stone-800 transition-colors text-sm font-medium">
+                            Create Community
+                        </Link>
+                        <CommunitySearch />
+                    </div>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8">

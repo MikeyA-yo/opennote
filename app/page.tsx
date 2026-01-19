@@ -15,12 +15,12 @@ export default function Home() {
             Share your gratitude, honor a memory, or stand for a cause.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-8 py-3 bg-stone-900 text-white rounded-full text-lg hover:bg-stone-800 transition-all shadow-lg hover:shadow-xl">
+            <Link href={'/communities'} className="px-8 py-3 bg-stone-900 text-white rounded-full text-lg hover:bg-stone-800 transition-all shadow-lg hover:shadow-xl">
               Start Writing
-            </button>
-            <button className="px-8 py-3 bg-white text-stone-900 border border-stone-200 rounded-full text-lg hover:bg-stone-50 transition-all">
+            </Link>
+            <Link href={'/communities'} className="px-8 py-3 bg-white text-stone-900 border border-stone-200 rounded-full text-lg hover:bg-stone-50 transition-all">
               Explore Notes
-            </button>
+            </Link>
           </div>
         </section>
 
