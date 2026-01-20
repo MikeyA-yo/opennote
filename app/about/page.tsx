@@ -4,7 +4,7 @@ export default function About() {
     return (
         <div className="min-h-screen flex flex-col">
 
-            <main className="flex-grow py-20 px-6 max-w-3xl mx-auto">
+            <main className="grow py-20 px-6 max-w-3xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-serif font-medium mb-12 text-stone-900">About OpenNote.</h1>
 
                 <div className="space-y-8 text-lg text-stone-700 leading-relaxed font-serif">

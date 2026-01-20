@@ -4,7 +4,7 @@ import TypewriterTitle from "./components/TypewriterTitle";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="flex-grow">
+      <main className="grow">
         {/* Hero Section */}
         <section className="py-20 md:py-32 px-6 text-center max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-serif font-medium leading-tight mb-8 text-stone-900">
@@ -103,7 +103,7 @@ export default function Home() {
                   <h3 className="text-xl font-serif mb-4 group-hover:text-stone-700 transition-colors">
                     "{tribute.title}"
                   </h3>
-                  <p className="text-stone-500 text-sm line-clamp-3 mb-6 flex-grow">
+                  <p className="text-stone-500 text-sm line-clamp-3 mb-6 grow">
                     {tribute.preview}
                   </p>
                   <div className="flex items-center gap-3 mt-auto">

@@ -33,7 +33,7 @@ export default async function CommunitiesPage({
 
     return (
         <div className="min-h-screen flex flex-col">
-            <main className="flex-grow py-12 px-6 max-w-7xl mx-auto w-full">
+            <main className="grow py-12 px-6 max-w-7xl mx-auto w-full">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
                     <div>
                         <h1 className="text-4xl font-serif font-medium mb-4 text-stone-900">Explore Communities</h1>
@@ -57,7 +57,7 @@ export default async function CommunitiesPage({
                                         {community.type}
                                     </div>
                                 </div>
-                                <div className="p-6 flex flex-col flex-grow">
+                                <div className="p-6 flex flex-col grow">
                                     <h3 className="text-xl font-serif mb-2 group-hover:text-stone-700 transition-colors">
                                         {community.name}
                                     </h3>
