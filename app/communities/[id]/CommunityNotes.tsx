@@ -74,25 +74,50 @@ export default function CommunityNotes({ communityId }: { communityId: string })
     };
 
     const renderContentWithLinks = (text: string) => {
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        const parts = text.split(urlRegex);
-        return parts.map((part, i) => {
-            if (part.match(urlRegex)) {
-                return (
-                    <a
-                        key={i}
-                        href={part}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-stone-900 border-b border-stone-300 hover:border-stone-900 transition-colors"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        {part}
-                    </a>
-                );
+        const parts: React.ReactNode[] = [];
+        const urlRegex = /https?:\/\/[^\s]+/g;
+        let lastIndex = 0;
+        let match = urlRegex.exec(text);
+
+        while (match) {
+            const rawUrl = match[0];
+            const start = match.index;
+            const end = start + rawUrl.length;
+
+            if (start > lastIndex) {
+                parts.push(text.slice(lastIndex, start));
             }
-            return part;
-        });
+
+            // Keep trailing punctuation outside the anchor.
+            const cleanedUrl = rawUrl.replace(/[),.!?;:]+$/, "");
+            const trailing = rawUrl.slice(cleanedUrl.length);
+
+            parts.push(
+                <a
+                    key={`${cleanedUrl}-${start}`}
+                    href={cleanedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-stone-900 underline decoration-stone-400 underline-offset-2 hover:decoration-stone-900 cursor-pointer pointer-events-auto"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {cleanedUrl}
+                </a>
+            );
+
+            if (trailing) {
+                parts.push(trailing);
+            }
+
+            lastIndex = end;
+            match = urlRegex.exec(text);
+        }
+
+        if (lastIndex < text.length) {
+            parts.push(text.slice(lastIndex));
+        }
+
+        return parts;
     };
 
     return (
@@ -117,9 +142,9 @@ export default function CommunityNotes({ communityId }: { communityId: string })
                                         {new Date(note.createdAt).toLocaleDateString()}
                                     </div>
                                 </div>
-                                <p className="text-stone-700 whitespace-pre-wrap font-serif leading-relaxed mb-4 line-clamp-4 break-words">
+                                <div className="text-stone-700 whitespace-pre-wrap font-serif leading-relaxed mb-4 wrap-break-word">
                                     {renderContentWithLinks(note.content)}
-                                </p>
+                                </div>
                                 {note.imageUrl && (
                                     <img
                                         src={note.imageUrl}
