@@ -73,6 +73,28 @@ export default function CommunityNotes({ communityId }: { communityId: string })
         }
     };
 
+    const renderContentWithLinks = (text: string) => {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        const parts = text.split(urlRegex);
+        return parts.map((part, i) => {
+            if (part.match(urlRegex)) {
+                return (
+                    <a
+                        key={i}
+                        href={part}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-stone-900 border-b border-stone-300 hover:border-stone-900 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {part}
+                    </a>
+                );
+            }
+            return part;
+        });
+    };
+
     return (
         <div className="space-y-8">
             <WriteNoteForm communityId={communityId} onNoteCreated={fetchNotes} />
@@ -95,8 +117,8 @@ export default function CommunityNotes({ communityId }: { communityId: string })
                                         {new Date(note.createdAt).toLocaleDateString()}
                                     </div>
                                 </div>
-                                <p className="text-stone-700 whitespace-pre-wrap font-serif leading-relaxed mb-4 line-clamp-4">
-                                    {note.content}
+                                <p className="text-stone-700 whitespace-pre-wrap font-serif leading-relaxed mb-4 line-clamp-4 break-words">
+                                    {renderContentWithLinks(note.content)}
                                 </p>
                                 {note.imageUrl && (
                                     <img

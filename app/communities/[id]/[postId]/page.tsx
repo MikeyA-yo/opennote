@@ -144,6 +144,28 @@ export default function PostDetailPage({
         );
     }
 
+    const renderContentWithLinks = (text: string) => {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        const parts = text.split(urlRegex);
+        return parts.map((part, i) => {
+            if (part.match(urlRegex)) {
+                return (
+                    <a
+                        key={i}
+                        href={part}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-stone-900 border-b border-stone-300 hover:border-stone-900 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {part}
+                    </a>
+                );
+            }
+            return part;
+        });
+    };
+
     const isLiked = currentUserEmail ? note.likes.includes(currentUserEmail) : false;
 
     return (
@@ -164,8 +186,8 @@ export default function PostDetailPage({
                                 {new Date(note.createdAt).toLocaleDateString()}
                             </div>
                         </div>
-                        <p className="text-lg text-stone-800 whitespace-pre-wrap font-serif leading-relaxed mb-6">
-                            {note.content}
+                        <p className="text-lg text-stone-800 whitespace-pre-wrap font-serif leading-relaxed mb-6 break-words">
+                            {renderContentWithLinks(note.content)}
                         </p>
                         {note.imageUrl && (
                             <img
