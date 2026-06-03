@@ -45,6 +45,7 @@ export default function JoinButton({
                 setShowInput(false);
                 localStorage.setItem(`joined_${communityId}`, email);
                 localStorage.setItem("user_email", email); // Save globally for writing notes
+                window.dispatchEvent(new Event("community_joined"));
             }
         } catch (error) {
             console.error("Failed to join", error);

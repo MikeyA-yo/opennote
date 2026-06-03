@@ -26,7 +26,7 @@ export default function About() {
                     <p className="text-stone-600 mb-4">
                         Have a question or want to share your story? We'd love to hear from you.
                     </p>
-                    <a href="mailto:hello@opennote.com" className="text-stone-900 font-medium border-b border-stone-900 pb-0.5 hover:text-stone-600 hover:border-stone-600 transition-colors">
+                    <a href="mailto:ayomideoluwatola1@gmail.com" className="text-stone-900 font-medium border-b border-stone-900 pb-0.5 hover:text-stone-600 hover:border-stone-600 transition-colors">
                         hello@opennote.com
                     </a>
                 </div>

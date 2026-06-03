@@ -20,9 +20,14 @@ export default function CommunityNotes({ communityId }: { communityId: string })
     const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null);
 
     useEffect(() => {
-        const joinedEmail = localStorage.getItem(`joined_${communityId}`);
-        const globalEmail = localStorage.getItem("user_email");
-        setCurrentUserEmail(joinedEmail || globalEmail);
+        const checkMembership = () => {
+            const joinedEmail = localStorage.getItem(`joined_${communityId}`);
+            const globalEmail = localStorage.getItem("user_email");
+            setCurrentUserEmail(joinedEmail || globalEmail);
+        };
+        checkMembership();
+        window.addEventListener("community_joined", checkMembership);
+        return () => window.removeEventListener("community_joined", checkMembership);
     }, [communityId]);
 
     const fetchNotes = useCallback(async () => {

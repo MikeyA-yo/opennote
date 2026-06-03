@@ -11,16 +11,21 @@ export default function WriteNoteForm({ communityId, onNoteCreated }: { communit
     const [isMember, setIsMember] = useState(false);
 
     useEffect(() => {
-        // Check if user has joined this specific community
-        const joinedEmail = localStorage.getItem(`joined_${communityId}`);
-        if (joinedEmail) {
-            setIsMember(true);
-            setEmail(joinedEmail);
-        } else {
-            // Fallback to global email if available, but they still need to join
-            const globalEmail = localStorage.getItem("user_email");
-            if (globalEmail) setEmail(globalEmail);
-        }
+        const checkMembership = () => {
+            // Check if user has joined this specific community
+            const joinedEmail = localStorage.getItem(`joined_${communityId}`);
+            if (joinedEmail) {
+                setIsMember(true);
+                setEmail(joinedEmail);
+            } else {
+                // Fallback to global email if available, but they still need to join
+                const globalEmail = localStorage.getItem("user_email");
+                if (globalEmail) setEmail(globalEmail);
+            }
+        };
+        checkMembership();
+        window.addEventListener("community_joined", checkMembership);
+        return () => window.removeEventListener("community_joined", checkMembership);
     }, [communityId]);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -61,7 +61,7 @@ export default async function CommunitiesPage({
                                     <h3 className="text-xl font-serif mb-2 group-hover:text-stone-700 transition-colors">
                                         {community.name}
                                     </h3>
-                                    <p className="text-stone-500 text-sm line-clamp-3 mb-4 flex-grow">
+                                    <p className="text-stone-500 text-sm line-clamp-3 mb-4 grow">
                                         {community.description}
                                     </p>
                                     <div className="text-xs text-stone-400">
